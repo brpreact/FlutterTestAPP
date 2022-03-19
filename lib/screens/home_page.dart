@@ -9,6 +9,24 @@ class HomePage extends StatelessWidget {
   static String routeName = "/";
 
   const HomePage({Key? key}) : super(key: key);
+  Route _createRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          const FavouritePage(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        final offsetAnimation = animation.drive(tween);
+        return SlideTransition(
+          position: offsetAnimation,
+          child: child,
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +36,7 @@ class HomePage extends StatelessWidget {
         actions: [
           TextButton.icon(
               onPressed: () {
-                Navigator.pushNamed(context, FavouritePage.routeName);
+                Navigator.of(context).push(_createRoute());
               },
               icon: const Icon(Icons.favorite_border),
               label: const Text('Fav'))

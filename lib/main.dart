@@ -18,11 +18,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: "Testing Sample Work",
         theme: ThemeData.dark(),
-        routes: {
-          HomePage.routeName: (context) => HomePage(),
-          FavouritePage.routeName: (context) => FavouritePage()
-        },
-        initialRoute: HomePage.routeName,
+        home: HomePage(),
       ),
     );
   }
